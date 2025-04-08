@@ -16,7 +16,7 @@ unet = net_factory(net_type='unetorg', in_chns=3, class_num=2, drop=True)
 unet= nn.DataParallel(unet)
 
 ## Loading the model state dict
-ch_path = '/home/gdemi/multi_view/segmentation/logs/best_model.pth'
+ch_path = 'best_model.pth'
 # checkpoint = torch.load(ch_path, weights_only=False)
 checkpoint = torch.load(ch_path)
 
@@ -36,7 +36,7 @@ vessel_transformer = T.Compose([ T.Normalize([0.485, 0.456, 0.406], [0.229, 0.22
 
 if __name__ == "__main__":
     import cv2
-    sample_img = cv2.imread('/home/gdemi/multi_view/od.png')
+    sample_img = cv2.imread('sample.png')
     sample_img = cv2.resize(sample_img, (256, 256))
     sample_img = cv2.cvtColor(sample_img, cv2.COLOR_BGR2RGB)
     sample_img = sample_img / 255.0
