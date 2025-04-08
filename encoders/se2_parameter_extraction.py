@@ -2,9 +2,19 @@ import torch
 import math
 
 """
-get_ground_truth_se2 fn returns SE(2) parameters for a given text prompt. 
+get_gt_se2 fn returns SE(2) parameters for a given text prompt. 
 Our goal in this parameters to extract geometrical/rotational behaviours between poses. 
+
+Function uses SE(2) parameters (θ, dx, dy) via get_ground_truth_se2 fn. 
 """
+
+def get_gt_se2(text_prompt):  
+    positions= []
+    for txt in text_prompt:
+        positions.append(get_ground_truth_se2(txt))
+    return torch.stack(positions, dim=0)
+
+
 def get_ground_truth_se2(text_prompt):
     """
     Maps text prompts like "left eye, input: OD, target: Nasal" to SE(2) parameters (θ, dx, dy).
